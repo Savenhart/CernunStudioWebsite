@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   childViewRef: ViewRef = {} as ViewRef;
 
   constructor(private http: HttpClient) { 
-    console.log(this.tpl);
   }
 
   ngOnInit(): void {
