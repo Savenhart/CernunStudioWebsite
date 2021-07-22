@@ -5,6 +5,7 @@
     </li>
     <li class="nav-item active">
         <app-login *ngIf="!currentUser"></app-login>
+        <p *ngIf="currentUser">{{currentUser.userName}}</p>
     </li>
     <li class="nav-item">
         <a class="nav-link" routerLink="/register" routerLinkActive="active" *ngIf="!currentUser">Register</a>
