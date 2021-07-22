@@ -21,5 +21,17 @@
       "content": "Des fois, je tests des trucs",
       "id": 3
     }
+  ],
+  "users": [
+    {
+      "userName": "test",
+      "password": "test",
+      "id": 1
+    },
+    {
+      "userName": "test2",
+      "password": "test2",
+      "id": 2
+    }
   ]
 }

@@ -10,6 +10,7 @@ import { CreateblogPostComponent } from './components/createblog-post/createblog
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LoginComponent } from './components/login/login.component';
     CreateblogPostComponent,
     HeaderComponent,
     LoginComponent,
+    RegisterComponent,
 
   ],
   imports: [
