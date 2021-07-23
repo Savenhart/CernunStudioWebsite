@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Post } from 'src/app/models/post';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-blog-post',
@@ -7,15 +8,18 @@ import { Post } from 'src/app/models/post';
   styleUrls: ['./blog-post.component.css'],
 })
 export class BlogPostComponent implements OnInit {
-  title: string = '';
-  userName: string = '';
-  date: string = '';
-  content: string = '';
-
+  
+  @Input() id!: number;
   @Input() postToWrite: Post = new Post();
+  @Output() postRemoved = new EventEmitter<Post>();
 
-  constructor() {}
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
+  }
+
+  destroyPost(id: number){
+    this.postService.delete(id);
+    this.postRemoved.emit();
   }
 }

@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { AuthentificationService } from 'src/app/services/authentification.service';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-register',
@@ -20,9 +22,14 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authentificationService: AuthentificationService,
+    private registerService: RegisterService
+  ) {
+    if (this.authentificationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -38,19 +45,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.user.userName = this.f.userName.value;
-    this.user.password = this.f.password.value;
-
-    const headers = { 'content-type': 'application/json' };
-    const body = JSON.stringify(this.user);
-    
-    this.http
-      .post<User>('/api/users', body, {
-        headers: headers,
-        observe: 'response',
-        reportProgress: true,
-      })
-      .subscribe();
-    this.router.navigate([this.returnUrl]);
+    this.registerService
+      .register(this.f.userName.value, this.f.password.value)
+      .pipe(first())
+      .subscribe((data) => {
+        this.router.navigate([this.returnUrl]);
+      });
   }
 }
