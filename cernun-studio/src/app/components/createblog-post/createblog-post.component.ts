@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Post } from 'src/app/models/post';
-import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user';
+import { AuthentificationService } from 'src/app/services/authentification.service';
+import { PostService } from 'src/app/services/post.service';
 
 
 @Component({
@@ -13,10 +14,14 @@ import { Observable } from 'rxjs';
 export class CreateblogPostComponent implements OnInit {
   post = new Post("");
 
+  currentUser!: User;
+
   sendForm: FormGroup = this.formBuilder.group({});
   submited = false;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private authentificationService: AuthentificationService, private postService: PostService) {
+    this.authentificationService.currentUser.subscribe(x => this.currentUser = x)
+   }
 
   ngOnInit(): void {
     this.sendForm = this.formBuilder.group({
@@ -34,19 +39,12 @@ export class CreateblogPostComponent implements OnInit {
 
   onSubmit(){
     this.post.title = this.f.title.value;
-    this.post.userName = this.f.userName.value;
-    this.post.date = this.f.date.value;
+    this.post.userName = this.currentUser.userName;
+    this.post.date = new Date().toISOString();
     this.post.content = this.f.content.value;
 
-    this.addPost(this.post).subscribe();
+   this.postService.create(this.post).subscribe();
     this.postCreated.emit(this.post);
   }
-
-  addPost(post:Post): Observable<any> {
-    const headers = { 'content-type': 'application/json'}  
-    const body=JSON.stringify(post);
- 
-    return this.http.post<Post>('/api/posts', body, {'headers':headers, observe: 'response',reportProgress: true});
-}
 
 }

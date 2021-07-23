@@ -2,5 +2,6 @@
     <h2>{{postToWrite.title }}</h2>
     <h3>de {{postToWrite.userName }}</h3>
     <h4>le {{postToWrite.date }}</h4>    
-    <p>{{postToWrite.content }}</p>        
+    <p>{{postToWrite.content }}</p>   
+    <button (click)="destroyPost(id)">X</button>     
 </div>

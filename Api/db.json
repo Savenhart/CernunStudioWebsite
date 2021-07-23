@@ -1,27 +1,5 @@
 {
-  "posts": [
-    {
-      "title": "C'est quand",
-      "userName": "même mieux",
-      "date": "2021-07-21",
-      "content": "comme ça !",
-      "id": 1
-    },
-    {
-      "title": "KeuWah !",
-      "userName": "Jean popol",
-      "date": "2021-07-21",
-      "content": "Que ne sais-je plus d'où je suis perdu !",
-      "id": 2
-    },
-    {
-      "title": "Je sais pas",
-      "userName": "Miqueline",
-      "date": "2021-07-21",
-      "content": "Des fois, je tests des trucs",
-      "id": 3
-    }
-  ],
+  "posts": [],
   "users": [
     {
       "userName": "test",
@@ -37,6 +15,16 @@
       "userName": "test",
       "password": "sdfsdf",
       "id": 3
+    },
+    {
+      "userName": "JeanPopol",
+      "password": "meh",
+      "id": 4
+    },
+    {
+      "userName": "Momo",
+      "password": "momo",
+      "id": 5
     }
   ]
 }

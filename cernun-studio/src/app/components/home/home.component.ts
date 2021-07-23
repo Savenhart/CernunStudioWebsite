@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewRef } from '@angular/core';
 import { Post } from 'src/app/models/post';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  posts: Post[] = [];
   @ViewChild('test', {read: ViewContainerRef}) test: ViewContainerRef = {} as ViewContainerRef;
 
   @ViewChild('tpl', {read: TemplateRef}) tpl: TemplateRef<any> = {} as TemplateRef<any>;
 
   childViewRef: ViewRef = {} as ViewRef;
 
-  constructor(private http: HttpClient) { 
+  constructor(private postService: PostService) { 
   }
 
   ngOnInit(): void {
@@ -29,11 +28,15 @@ export class HomeComponent implements OnInit {
      this.loadPost();
   }
 
-  posts2$: Observable<any> = this.http.get('/api/posts');
+  posts2$: Observable<any> = this.postService.getAll();
 
   onPostCreated(post: Post){
-    this.posts.push(post);
-    this.posts2$ = this.http.get('/api/posts');
+    this.posts2$ = this.postService.getAll();
+    this.loadPost();
+  }
+
+  onPostRemoved(){
+    this.posts2$ = this.postService.getAll();
     this.loadPost();
   }
 
@@ -42,15 +45,6 @@ export class HomeComponent implements OnInit {
     setTimeout(()=>{
       this.test.insert(this.childViewRef);
     })
-  }
-
-  destroyPost(id: number){
-    const headers = { 'content-type': 'application/json'};
-
-    this.http.delete(`/api/posts/${ id }`, {'headers':headers, observe: 'response',reportProgress: true}).subscribe();
-
-    this.posts2$ = this.http.get('/api/posts');
-
   }
 
 }
