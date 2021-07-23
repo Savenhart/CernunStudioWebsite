@@ -1,0 +1,7 @@
+<form [formGroup]="sendForm" (ngSubmit)="onSubmit()" *ngIf="currentUser">
+    <label>Titre</label>
+    <input id="title" formControlName="title"><br>
+    <label>Contenu</label>
+    <input id="content" type="" formControlName="content"><br>
+    <button> Créer </button>
+</form>

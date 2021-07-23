@@ -1,0 +1,30 @@
+{
+  "posts": [],
+  "users": [
+    {
+      "userName": "test",
+      "password": "test",
+      "id": 1
+    },
+    {
+      "userName": "test2",
+      "password": "test2",
+      "id": 2
+    },
+    {
+      "userName": "test",
+      "password": "sdfsdf",
+      "id": 3
+    },
+    {
+      "userName": "JeanPopol",
+      "password": "meh",
+      "id": 4
+    },
+    {
+      "userName": "Momo",
+      "password": "momo",
+      "id": 5
+    }
+  ]
+}

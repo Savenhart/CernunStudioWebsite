@@ -1,0 +1,28 @@
+{
+  "name": "cernunstudiowebsite",
+  "version": "1.0.0",
+  "description": "Website for Cernun Studio",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./server.ts localhost 3080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Savenhart/CernunStudioWebsite.git"
+  },
+  "author": "Théo \"Savenhart\" Lounissi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Savenhart/CernunStudioWebsite/issues"
+  },
+  "homepage": "https://github.com/Savenhart/CernunStudioWebsite#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.3.3",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.1.0"
+  }
+}

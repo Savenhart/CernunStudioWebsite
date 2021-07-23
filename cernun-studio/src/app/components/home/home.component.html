@@ -1,0 +1,15 @@
+<h1>BBBBBBWAAAAAAAAAAAAAAAAHHHHHHHHHHHH !!!!!!</h1>
+
+<div id="posts"></div>
+
+<app-createblog-post
+  (postCreated)="onPostCreated($event)"
+></app-createblog-post>
+
+<h2>Posts</h2>
+<ng-container #test></ng-container>
+<ng-template #tpl>
+  <div *ngFor="let post of posts2$ | async">
+    <app-blog-post [postToWrite]="post" [id]="post.id" (postRemoved)="onPostRemoved()">  </app-blog-post>
+  </div>
+</ng-template>
