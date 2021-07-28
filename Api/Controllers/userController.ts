@@ -1,8 +1,5 @@
 import { User } from "../models/userModels";
-import express from "express";
-const router = express.Router();
 import fs from "fs";
-import route from "../routes.json";
 
 export class userController {
   async getAll() {
@@ -16,51 +13,110 @@ export class userController {
 
   async getById(id: number) {
     return new Promise((resolve) => {
-      fs.readFile("./db.json", (_err, json) => {
-        let obj = JSON.parse(json.toString());
-        for (const o of obj.users) {
-          if (o.id == id) {
-            resolve(o);
-            console.log(o);
-          } else {
-            resolve({ Error: "404" });
+      this.getAll()
+        .then((obj: any) => {
+          let res: object = {};
+          for (const o of obj.users) {
+            if (o.id == id) {
+              res = o;
+              break;
+            } else {
+              res = { Error: "404" };
+            }
           }
-        }
-      });
+          resolve(res);
+        })
+        .catch((err: Error) => {
+          console.log("Got an error = ", err);
+          resolve("Got an error");
+        });
     });
   }
 
-  async create() {
-    router.post(
-      route.users,
-      (
-        req: { body: { user: User } },
-        res: { json: (arg0: string) => void }
-      ) => {
-        const user = req.body.user;
-        console.log("Adding user:::::", user);
-        fs.readFile("./db.json", (err, json) => {
-          if (err) {
-            console.log(err);
-          } else {
-            let obj = {
-              users: [] as any,
-            };
-            obj = JSON.parse(json.toString());
-            obj.users.push(user);
+  async getByUserName(userName: string) {
+    return new Promise((resolve) => {
+      this.getAll()
+        .then((obj: any) => {
+          let res: object = {};
+          for (const o of obj.users) {
+            if (o.userName == userName) {
+              res = o;
+              break;
+            } else {
+              res = { Error: "Ce nom d'utilisateur n'existe pas !" };
+            }
+          }
+          resolve(res);
+        })
+        .catch((err: Error) => {
+          console.log("Got an error = ", err);
+          resolve("Got an error");
+        });
+    });
+  }
 
-            let data = JSON.stringify(obj);
+  async create(user: User) {
+    return new Promise((resolve) => {
+      console.log("Adding user:::::", user);
+      this.getAll()
+        .then((obj: any) => {
+          let i = 1;
+          let isIDUsed = true;
+          for (const o of obj.users) {
+            if (o.id == i && isIDUsed) {
+              user.id = i + 1;
+            } else {
+              user.id = i;
+              isIDUsed = false;
+            }
+            i++;
+          }
+          obj.users.push(user);
 
-            fs.writeFile("./db.json", data, (err: any) => {
-              if (err) console.log(err);
-              else {
-                console.log("File written successfully\n");
-                res.json("user added");
-              }
-            });
+          let data = JSON.stringify(obj);
+
+          fs.writeFile("./db.json", data, (err: any) => {
+            if (err) resolve(err);
+            else {
+              resolve("File written successfully");
+              console.log("User Added");
+            }
+          });
+        })
+        .catch((err: Error) => {
+          console.log("Got an error = ", err);
+          resolve("Got an error");
+        });
+    });
+  }
+
+  async updateById(id: number, user: User) {
+    return new Promise((resolve) => {
+      this.getById(id).then((obj: any) => {});
+    });
+  }
+
+  async deleteById(id: number) {
+    return new Promise((resolve) => {
+      this.getAll().then((obj: any) => {
+        let data: any[] = [];
+        for (const o of obj.users) {
+          if (o.id != id) {
+            data.push(o);
+          }
+        }
+        obj.users = data;
+
+        let res = JSON.stringify(obj);
+
+        fs.writeFile("./db.json", res, (err: any) => {
+          if (err) resolve(err);
+          else {
+            resolve("File written successfully");
+            console.log("User removed");
           }
         });
-      }
-    );
+      });
+    });
   }
 }

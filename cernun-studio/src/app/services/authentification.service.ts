@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
 @Injectable({
@@ -30,15 +31,16 @@ export class AuthentificationService {
 
   login(user: User) {
     this.http
-      .get<User[]>(`api/users?userName=${user.userName}`)
+      .get<User>(`${environment.apiUrl}/api/users/userName/${user.userName}`)
       .subscribe(
         (data) => {
-          if (data[0].password == user.password) {
+          console.log(data);
+          if (data.password == user.password) {
             localStorage.setItem(
               'currentUser',
-              JSON.stringify(data[0])
+              JSON.stringify(data)
             );
-            this.currentUserSubject.next(data[0]);
+            this.currentUserSubject.next(data);
           }
         },
         (error) => {
