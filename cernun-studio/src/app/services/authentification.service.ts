@@ -22,7 +22,6 @@ export class AuthentificationService {
     this.currentUserSubject = new BehaviorSubject<any>(data);
 
     this.currentUser = this.currentUserSubject.asObservable();
-
   }
 
   public get currentUserValue(): User {

@@ -1,10 +1,9 @@
 export class User {
-    userName: string;
-    password: string;
+    userName!: string;
+    password!: string;
 
 
-    constructor(userName?:string, password?:string) {
-        this.userName = userName || "";
-        this.password = password || "";
+    constructor(obj: object) {
+        Object.assign(this, obj)
     }
 }

@@ -1,7 +1,15 @@
-import { User } from "../models/userModels";
+import { User } from "../Models/userModels";
 import fs from "fs";
+import { userService } from "../Services/userService";
 
 export class userController {
+  private userService: userService;
+
+  constructor(){
+    this.userService = new userService();
+    //const test = new userService();
+  }
+
   async getAll() {
     return new Promise((resolve) => {
       fs.readFile("./db.json", (_err, json) => {
@@ -57,36 +65,41 @@ export class userController {
 
   async create(user: User) {
     return new Promise((resolve) => {
-      console.log("Adding user:::::", user);
-      this.getAll()
-        .then((obj: any) => {
-          let i = 1;
-          let isIDUsed = true;
-          for (const o of obj.users) {
-            if (o.id == i && isIDUsed) {
-              user.id = i + 1;
-            } else {
-              user.id = i;
-              isIDUsed = false;
-            }
-            i++;
-          }
-          obj.users.push(user);
+      // console.log("Adding user:::::", user);
+      // this.getAll()
+      //   .then((obj: any) => {
+      //     let i = 1;
+      //     let isIDUsed = true;
+      //     for (const o of obj.users) {
+      //       if (o.id == i && isIDUsed) {
+      //         user.id = i + 1;
+      //       } else {
+      //         user.id = i;
+      //         isIDUsed = false;
+      //       }
+      //       i++;
+      //     }
+      //     obj.users.push(user);
 
-          let data = JSON.stringify(obj);
+      //     let data = JSON.stringify(obj);
 
-          fs.writeFile("./db.json", data, (err: any) => {
-            if (err) resolve(err);
-            else {
-              resolve("File written successfully");
-              console.log("User Added");
-            }
-          });
-        })
-        .catch((err: Error) => {
-          console.log("Got an error = ", err);
-          resolve("Got an error");
-        });
+      //     fs.writeFile("./db.json", data, (err: any) => {
+      //       if (err) resolve(err);
+      //       else {
+      //         resolve("File written successfully");
+      //         console.log("User Added");
+      //       }
+      //     });
+      //   })
+      //   .catch((err: Error) => {
+      //     console.log("Got an error = ", err);
+      //     resolve("Got an error");
+      //   });
+
+      console.log(user);
+      resolve(this.userService.create(user));
+    }).catch((err) => {
+      console.log(err);
     });
   }
 

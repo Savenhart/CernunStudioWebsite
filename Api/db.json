@@ -1,1 +1,8 @@
-{"users":[{"userName":"test","password":"test","id":1},{"userName":"Poupou","password":"pupu","id":2},{"userName":"retest","password":"testre","id":3},{"userName":"test2","password":"test","id":4}]}
+{
+  "users": [
+    { "userName": "test", "password": "test", "id": 1 },
+    { "userName": "Poupou", "password": "pupu", "id": 2 },
+    { "userName": "retest", "password": "testre", "id": 3 },
+    { "userName": "test2", "password": "test", "id": 4 }
+  ]
+}
