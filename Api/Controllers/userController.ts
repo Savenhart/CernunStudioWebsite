@@ -5,7 +5,7 @@ import { userService } from "../Services/userService";
 export class userController {
   private userService: userService;
 
-  constructor(){
+  constructor() {
     this.userService = new userService();
     //const test = new userService();
   }
@@ -43,59 +43,22 @@ export class userController {
 
   async getByUserName(userName: string) {
     return new Promise((resolve) => {
-      this.getAll()
-        .then((obj: any) => {
-          let res: object = {};
-          for (const o of obj.users) {
-            if (o.userName == userName) {
-              res = o;
-              break;
-            } else {
-              res = { Error: "Ce nom d'utilisateur n'existe pas !" };
-            }
-          }
-          resolve(res);
+         this.userService
+        .findByName(userName)
+        .then((data) => {
+          resolve(data);
         })
-        .catch((err: Error) => {
-          console.log("Got an error = ", err);
-          resolve("Got an error");
+        .catch((err) => {
+          console.log(err);
+          resolve(err);
         });
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
   async create(user: User) {
     return new Promise((resolve) => {
-      // console.log("Adding user:::::", user);
-      // this.getAll()
-      //   .then((obj: any) => {
-      //     let i = 1;
-      //     let isIDUsed = true;
-      //     for (const o of obj.users) {
-      //       if (o.id == i && isIDUsed) {
-      //         user.id = i + 1;
-      //       } else {
-      //         user.id = i;
-      //         isIDUsed = false;
-      //       }
-      //       i++;
-      //     }
-      //     obj.users.push(user);
-
-      //     let data = JSON.stringify(obj);
-
-      //     fs.writeFile("./db.json", data, (err: any) => {
-      //       if (err) resolve(err);
-      //       else {
-      //         resolve("File written successfully");
-      //         console.log("User Added");
-      //       }
-      //     });
-      //   })
-      //   .catch((err: Error) => {
-      //     console.log("Got an error = ", err);
-      //     resolve("Got an error");
-      //   });
-
       console.log(user);
       resolve(this.userService.create(user));
     }).catch((err) => {

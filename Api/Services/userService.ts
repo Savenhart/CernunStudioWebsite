@@ -12,4 +12,10 @@ export class userService{
     async create(user: User){
         this.repository.save(user);
     }
+
+    async findByName(userName: string){
+        return await this.repository.findByName(userName).then((data) => {
+            return data;
+        });
+    }
 }
