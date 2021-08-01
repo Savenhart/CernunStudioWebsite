@@ -9,7 +9,7 @@ export class userRoute{
     this.userC = new userController();
     this.router = express.Router();
     this.router.get("/", async (req, res, next) => {
-      try {
+      try {        
         res.send(await this.userC.getAll());
       } catch (err: any) {
         console.error(`Error`, err.message);
@@ -45,7 +45,7 @@ export class userRoute{
       }
     });
     
-    this.router.put('/:id', async (req, res, next) => {
+    this.router.patch('/:id', async (req, res, next) => {
       try {
         res.send(await this.userC.updateById(parseInt(req.params.id), req.body))
       } catch (error: any) {
@@ -53,15 +53,17 @@ export class userRoute{
         next(error);
       }
     })
-    
-    this.router.delete(`/:id`), async(req: { params: { id: string; }; }, res: { send: (arg0: unknown) => void; }, next: (arg0: any) => void) => {
+  
+    this.router.delete(`/:id`, async(req: { params: { id: string; }; }, res: { send: (arg0: unknown) => void; }, next: (arg0: any) => void) => {
+      console.log("trest");
+      
       try {
         res.send(await this.userC.deleteById(parseInt(req.params.id)))
       } catch (error: any) {
         console.error(`Error`, error.message);
         next(error);
       }
-    }
+    })
   }
 }
 

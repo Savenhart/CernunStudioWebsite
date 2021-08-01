@@ -12,38 +12,32 @@ export class userController {
 
   async getAll() {
     return new Promise((resolve) => {
-      fs.readFile("./db.json", (_err, json) => {
-        let obj = JSON.parse(json.toString());
-        resolve(obj);
-      });
+      this.userService.findAll().then((data)=>{
+        resolve(data);
+      }).catch((err) => {
+        console.log(err);
+        resolve(err);
+      })
+    }).catch((err) => {
+      console.log(err);
+      
     });
   }
 
   async getById(id: number) {
     return new Promise((resolve) => {
-      this.getAll()
-        .then((obj: any) => {
-          let res: object = {};
-          for (const o of obj.users) {
-            if (o.id == id) {
-              res = o;
-              break;
-            } else {
-              res = { Error: "404" };
-            }
-          }
-          resolve(res);
-        })
-        .catch((err: Error) => {
-          console.log("Got an error = ", err);
-          resolve("Got an error");
-        });
+      this.userService.findById(id).then((data) => {
+        resolve(data);
+      }).catch((err) => {
+        console.log(err);
+        resolve(err);
+      })
     });
   }
 
   async getByUserName(userName: string) {
     return new Promise((resolve) => {
-         this.userService
+      this.userService
         .findByName(userName)
         .then((data) => {
           resolve(data);
@@ -68,31 +62,22 @@ export class userController {
 
   async updateById(id: number, user: User) {
     return new Promise((resolve) => {
-      this.getById(id).then((obj: any) => {});
+      this.userService.updateById(id, user).then((data) =>{
+        resolve(data);
+      }).catch((err) => {
+        resolve(err);
+      })
     });
   }
 
   async deleteById(id: number) {
+
     return new Promise((resolve) => {
-      this.getAll().then((obj: any) => {
-        let data: any[] = [];
-        for (const o of obj.users) {
-          if (o.id != id) {
-            data.push(o);
-          }
-        }
-        obj.users = data;
-
-        let res = JSON.stringify(obj);
-
-        fs.writeFile("./db.json", res, (err: any) => {
-          if (err) resolve(err);
-          else {
-            resolve("File written successfully");
-            console.log("User removed");
-          }
-        });
-      });
+      this.userService.deleteById(id).then(() => {
+        resolve("User deleted");
+      }).catch((err) => {
+        resolve(err);
+      })
     });
   }
 }
