@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
 @Injectable({
@@ -25,7 +26,7 @@ export class RegisterService {
 
    register(userName: string, password: string) {
     //password  = sha512.sha512('CernunosPassword' + password);
-    return this.http.post<any>(`api/users`, { userName, password})
+    return this.http.post<any>(`${environment.apiUrl}/api/users`, { userName, password})
       .pipe(map(user => {
         if (user.statusHttp === 200) {
           localStorage.setItem('currentUser', JSON.stringify(user));

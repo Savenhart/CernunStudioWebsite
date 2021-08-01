@@ -10,10 +10,12 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.formBuilder.group({});
-  user: User = new User();
+  user!: User;
 
-  constructor(private formBuilder: FormBuilder, private authentificationService: AuthentificationService) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private authentificationService: AuthentificationService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -22,13 +24,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get f() { return this.loginForm.controls; }
-
-  onSubmit() {
-    this.user.userName = this.f.userName.value;
-    this.user.password = this.f.password.value;
-    
-    this.authentificationService.login(this.user)
+  get f() {
+    return this.loginForm.controls;
   }
 
+  onSubmit() {
+    this.user = {
+      userName: this.f.userName.value,
+      password: this.f.password.value,
+    };
+
+    this.authentificationService.login(this.user);
+  }
 }
