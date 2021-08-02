@@ -3,12 +3,13 @@ import path from "path";
 const app = express();
 const port = 3080;
 import route from "./routes.json";
-//const userRouter = require('../Api/Routes/userRoute');
 import { userRoute } from "../Api/Routes/userRoute";
 import { DBConnect } from "./Utils/DBConnect";
+import { postRoute } from "./Routes/postRoute";
 
 const dbConnect = DBConnect.getInstance();
 const userRouter = new userRoute();
+const postRouter = new postRoute();
 
 app.use(express.json());
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../cernunstudio/build")));
 
 app.use(route.users, userRouter.router);
+app.use(route.posts, postRouter.router);
 
 dbConnect.test().catch((err) => {
   console.log(err);

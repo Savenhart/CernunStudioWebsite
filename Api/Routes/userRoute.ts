@@ -66,5 +66,3 @@ export class userRoute{
     })
   }
 }
-
-//module.exports = userRoute;

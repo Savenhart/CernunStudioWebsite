@@ -22,4 +22,8 @@ export class BlogPostComponent implements OnInit {
     this.postService.delete(id);
     this.postRemoved.emit();
   }
+
+  formatToLocalDate(date: Date){
+    return new Date(date).toLocaleDateString();
+  }
 }

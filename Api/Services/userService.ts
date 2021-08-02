@@ -9,6 +9,7 @@ export class userService{
     constructor(){
         this.repository = new userRepository();
     }
+    
     async create(user: User){
         this.repository.save(user);
     }
