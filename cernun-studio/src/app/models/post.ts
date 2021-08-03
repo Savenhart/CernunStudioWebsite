@@ -1,15 +1,13 @@
-export class Post {
-  title: string;
-  userName: string;
-  date: string;
-  content: string;
-  id: string
+import { User } from "./user";
 
-  constructor(title?: string, userName?: string, date?: string, content?:string, id?: string) {
-    this.title = title || "";
-    this.userName = userName || "";
-    this.date = date || "";
-    this.content = content || "";
-    this.id = id || "";
+export class Post {
+  title!: string;
+  user!: User;
+  date!: Date;
+  content!: string;
+  id!: string
+
+  constructor(obj?: Object) {
+    Object.assign(this, obj)
   }
 }

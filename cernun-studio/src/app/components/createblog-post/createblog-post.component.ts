@@ -38,10 +38,13 @@ export class CreateblogPostComponent implements OnInit {
   @Output() postCreated = new EventEmitter<Post>();
 
   onSubmit(){
-    this.post.title = this.f.title.value;
-    this.post.userName = this.currentUser.userName;
-    this.post.date = new Date().toISOString();
-    this.post.content = this.f.content.value;
+    let nowDate = new Date().getFullYear() + "/" + (new Date().getMonth()+1) + "/" + (new Date().getDay()+1);
+    
+    this.post = new Post({title: this.f.title.value,
+      user: this.currentUser,
+      date:  nowDate,
+      content: this.f.content.value
+    });
 
    this.postService.create(this.post).subscribe();
     this.postCreated.emit(this.post);
