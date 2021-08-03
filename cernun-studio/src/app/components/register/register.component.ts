@@ -13,8 +13,7 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.formBuilder.group({});
-
-  user: User = new User();
+  
   userName: string = '';
   password: string = '';
   returnUrl: string = '';
