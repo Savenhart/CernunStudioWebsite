@@ -23,7 +23,11 @@ export class postController {
         });
     }
     async getAllByUser(userName: string) {
-        throw new Error("Method not implemented.");
+        return new Promise((resolve) => {
+            resolve(this.postService.findAllByUser(userName))
+        }).catch((err) => {
+            console.log(err);
+        });
     }
     async create(post: Post) {
         return new Promise((resolve) => {
@@ -32,10 +36,18 @@ export class postController {
             console.log(err);
           });
     }
-    async updateById(arg0: number, body: any) {
-        throw new Error("Method not implemented.");
+    async updateById(id: number, body: any) {
+        return new Promise((resolve) => {
+            resolve(this.postService.updateById(id, body))
+        }).catch((err) => {
+            console.log(err);
+        });
     }
-    async deleteById(arg0: number) {
-        throw new Error("Method not implemented.");
+    async deleteById(id: number) {
+        return new Promise((resolve) => {
+            resolve(this.postService.deleteById(id))
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 }

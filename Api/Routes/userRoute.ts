@@ -55,8 +55,6 @@ export class userRoute{
     })
   
     this.router.delete(`/:id`, async(req: { params: { id: string; }; }, res: { send: (arg0: unknown) => void; }, next: (arg0: any) => void) => {
-      console.log("trest");
-      
       try {
         res.send(await this.userC.deleteById(parseInt(req.params.id)))
       } catch (error: any) {

@@ -56,8 +56,6 @@ export class postRoute {
       })
     
       this.router.delete(`/:id`, async(req: { params: { id: string; }; }, res: { send: (arg0: unknown) => void; }, next: (arg0: any) => void) => {
-        console.log("trest");
-        
         try {
           res.send(await this.postC.deleteById(parseInt(req.params.id)))
         } catch (error: any) {
