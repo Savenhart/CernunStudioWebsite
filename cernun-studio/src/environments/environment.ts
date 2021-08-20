@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   jsonUrl: 'http://localhost:3000',
-  apiUrl: 'http://localhost:3080'
+  //apiUrl: 'http://localhost:3080',
+  apiUrl: 'http://89.89.222.132:3080',
+  CryptoKey: 'Cernunnos'
 };
 
 /*
