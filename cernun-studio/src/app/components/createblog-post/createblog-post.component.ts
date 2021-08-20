@@ -38,8 +38,7 @@ export class CreateblogPostComponent implements OnInit {
   @Output() postCreated = new EventEmitter<Post>();
 
   onSubmit(){
-    let nowDate = new Date().getFullYear() + "/" + (new Date().getMonth()+1) + "/" + (new Date().getDay()+1);
-    
+    let nowDate = new Date().getFullYear() + "/" + (new Date().getMonth()+1) + "/" + (new Date().getDate());
     this.post = new Post({title: this.f.title.value,
       user: this.currentUser,
       date:  nowDate,

@@ -6,6 +6,11 @@
           Home
         </a>
       </li>
+      <li>
+        <a class="nav-link" routerLink="/gameSheet" routerLinkActive="active">
+          Game List
+        </a>
+      </li>
     </ul>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown" *ngIf="!currentUser">
@@ -17,7 +22,7 @@
         </ul>
       </li>
       <li class="nav-item active" *ngIf="currentUser">
-        <a class="nav-link" >{{ currentUser.userName }}</a>
+        <a class="nav-link" routerLink="/userProfile">{{ currentUser.userName }}</a>
       </li>
       <li class="nav-item " aria-hidden="true" *ngIf="currentUser">
         <a class="nav-link" (click)="logout()" routerLink="/login" routerLinkActive="active">

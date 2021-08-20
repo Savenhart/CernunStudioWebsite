@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.user = {
+      id: "",
       userName: this.f.userName.value,
       password: this.f.password.value,
     };
