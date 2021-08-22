@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "../cernunstudio/build")));
 app.use(route.users, userRouter.router);
 app.use(route.posts, postRouter.router);
 
-dbConnect.test().catch((err) => {
+dbConnect.initTable().catch((err) => {
   console.log(err);
 });
 
