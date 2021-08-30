@@ -1,8 +1,11 @@
+import { GameImageModel } from "./game-image-model";
+
 export class GameSheet {
-    id!: string;
+    id!: number;
     name!: string;
     date!: Date;
     content!: string;
+    images!: GameImageModel[];
     link!: string;
 
     constructor(obj?: Object) {

@@ -49,7 +49,7 @@ export class DBConnect {
         "content TEXT(65532) NOT NULL)" +
         "ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
       let query4 =
-        "CREATE TABLE IF NOT EXISTS image(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
+        "CREATE TABLE IF NOT EXISTS game_image(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, " +
         "name VARCHAR(10) NOT NULL UNIQUE, " +
         "link VARCHAR(255) NOT NULL, " +
         "game_id INT NOT NULL, " +

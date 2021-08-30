@@ -1,0 +1,6 @@
+<div *ngFor="let game of games$ | async">
+
+    <a class="nav-link" routerLink="/gameSheet/{{game.id}}" routerLinkActive="active">
+        {{game.name}}
+      </a>
+</div>

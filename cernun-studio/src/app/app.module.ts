@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { GameSheetComponent } from './components/game-sheet/game-sheet.component';
+import { GameListComponent } from './components/game-list/game-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { GameSheetComponent } from './components/game-sheet/game-sheet.component
     RegisterComponent,
     UserProfileComponent,
     GameSheetComponent,
+    GameListComponent,
 
   ],
   imports: [

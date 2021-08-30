@@ -6,10 +6,12 @@ import route from "./routes.json";
 import { userRoute } from "../Api/Routes/userRoute";
 import { DBConnect } from "./Utils/DBConnect";
 import { postRoute } from "./Routes/postRoute";
+import { gameRoute } from "./Routes/gameRoute";
 
 const dbConnect = DBConnect.getInstance();
 const userRouter = new userRoute();
 const postRouter = new postRoute();
+const gameRouter = new gameRoute();
 
 app.use(express.json());
 
@@ -26,6 +28,7 @@ app.use(express.static(path.join(__dirname, "../cernunstudio/build")));
 
 app.use(route.users, userRouter.router);
 app.use(route.posts, postRouter.router);
+app.use(route.games, gameRouter.router);
 
 dbConnect.initTable().catch((err) => {
   console.log(err);
