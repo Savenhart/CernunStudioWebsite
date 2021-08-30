@@ -1,4 +1,9 @@
 <div>
     <h1>{{game.name}}</h1>
+    <p>{{game.date}}</p>
     <p>{{game.content}}</p>
+    <p>{{game.link}}</p>
+    <p *ngFor="let img of game.images">
+    {{img.name}}
+</p>
 </div>
