@@ -2,5 +2,6 @@
     "/api/*": "/$1",
     "users": "/api/users",
     "posts": "/api/posts",
-    "games": "/api/games"
+    "games": "/api/games",
+    "uploadImage":"/api/Assets/Pictures"
   }

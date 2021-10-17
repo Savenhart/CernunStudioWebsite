@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { GameImageModel } from 'src/app/models/game-image-model';
 import { GameSheet } from 'src/app/models/game-sheet';
 import { GameSheetService } from 'src/app/services/game-sheet.service';
@@ -12,7 +11,6 @@ import { GameSheetService } from 'src/app/services/game-sheet.service';
 })
 export class GameSheetComponent implements OnInit {
   id!: number;
-
   game: GameSheet = new GameSheet();
 
   constructor(
@@ -35,7 +33,6 @@ export class GameSheetComponent implements OnInit {
         link: data.link
       });
     });
-    
   }
 
   ngOnInit(): void {}

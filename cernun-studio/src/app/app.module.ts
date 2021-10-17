@@ -14,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { GameSheetComponent } from './components/game-sheet/game-sheet.component';
 import { GameListComponent } from './components/game-list/game-list.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +28,16 @@ import { GameListComponent } from './components/game-list/game-list.component';
     UserProfileComponent,
     GameSheetComponent,
     GameListComponent,
-
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

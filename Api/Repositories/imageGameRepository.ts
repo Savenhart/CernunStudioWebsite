@@ -9,25 +9,25 @@ export class ImageGameRepository {
   }
 
   async save(image: Image) {
-    // let conn;
-    // try {
-    //   let query = `INSERT INTO game(name, date, content) VALUES (?, ?, ?);`;
+     let conn;
+     try {
+       let query = `INSERT INTO game(name, link, gameId) VALUES (?, ?, ?);`;
 
-    //   conn = await this.dbConnect.pool.getConnection();
-    //   const res = await conn
-    //     .query(query, [game.name, game.date, game.content])
-    //     .then((data) => {
-    //       return data;
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    //   return res;
-    // } catch (error) {
-    //   throw error;
-    // } finally {
-    //   if (conn) conn.end();
-    // }
+      conn = await this.dbConnect.pool.getConnection();
+      const res = await conn
+        .query(query, [image.name, image.link, image.gameId])
+        .then((data) => {
+          return data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return res;
+    } catch (error) {
+      throw error;
+    } finally {
+      if (conn) conn.end();
+    }
   }
 
   async findAll() {

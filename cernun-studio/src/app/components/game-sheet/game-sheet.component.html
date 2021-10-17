@@ -4,6 +4,8 @@
     <p>{{game.content}}</p>
     <p>{{game.link}}</p>
     <p *ngFor="let img of game.images">
-    {{img.name}}
+        {{img.name}}
+    <img src={{img.link}}>
 </p>
+<app-image-upload></app-image-upload>
 </div>
