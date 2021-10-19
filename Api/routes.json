@@ -3,5 +3,7 @@
     "users": "/api/users",
     "posts": "/api/posts",
     "games": "/api/games",
-    "uploadImage":"/api/Assets/Pictures"
+    "picture": "/Api/picture",
+    "uploadImage":"/api/Assets/Pictures",
+    "serverAddress":"http://89.89.222.132:3080/"
   }

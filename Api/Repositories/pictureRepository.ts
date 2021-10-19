@@ -1,7 +1,7 @@
 import { Image } from "../Models/imageModel";
 import { DBConnect } from "../Utils/DBConnect";
 
-export class ImageGameRepository {
+export class pictureRepository {
   private dbConnect: DBConnect;
 
   constructor() {
@@ -11,8 +11,9 @@ export class ImageGameRepository {
   async save(image: Image) {
      let conn;
      try {
-       let query = `INSERT INTO game(name, link, gameId) VALUES (?, ?, ?);`;
-
+       let query = `INSERT INTO game_image(name, link, game_id) VALUES (?, ?, ?);`;
+      console.log('repo', image);
+      
       conn = await this.dbConnect.pool.getConnection();
       const res = await conn
         .query(query, [image.name, image.link, image.gameId])

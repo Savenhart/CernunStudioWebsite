@@ -12,6 +12,8 @@ import { GameSheetService } from 'src/app/services/game-sheet.service';
 export class GameSheetComponent implements OnInit {
   id!: number;
   game: GameSheet = new GameSheet();
+  imageToShow: any;
+  isImageLoading: boolean = false;
 
   constructor(
     private gameSheetService: GameSheetService,
@@ -21,9 +23,10 @@ export class GameSheetComponent implements OnInit {
     this.gameSheetService.getById(this.id).subscribe((data: any) => {
       let gameImages: GameImageModel[] = [];
       
-      for (const img of data.image) {
+      for (const img of data.image) {       
         gameImages.push(img);
       }
+
       this.game = new GameSheet({
         id: data.id,
         name: data.name,

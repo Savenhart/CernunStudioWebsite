@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,12 +10,15 @@ export class ImageService {
   
   constructor(private httpClient: HttpClient) { }
 
-  uploadPicture(formData: FormData){
-    console.log(formData);
-    
-    return this.httpClient.post<any>(`${environment.apiUrl}/api/assets/pictures`, formData, {
+  uploadPicture(formData: FormData){ 
+    return this.httpClient.post<any>(`${environment.apiUrl}/api/picture`, formData, {
       reportProgress: true,
-      observe: 'events'
+      observe: 'events',
+      withCredentials : false
+    }).subscribe(res => {
+      console.log(res);
+      alert('Uploaded Successfully.');
     });
   }
+
 }

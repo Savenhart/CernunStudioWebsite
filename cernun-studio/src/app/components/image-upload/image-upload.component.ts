@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
-
+  @Input() gameID!: any;
   images : string[] = [];
   myForm = new FormGroup({
    name: new FormControl('', [Validators.required]),
    file: new FormControl('', [Validators.required]),
-   fileSource: new FormControl('', [Validators.required])
+   fileSource: new FormControl('', [Validators.required]),
+   gameID: new FormControl(this.gameID)
  });
 
-  constructor(private imageService: ImageService, private http: HttpClient ) { 
+  constructor(private imageService: ImageService, private route: ActivatedRoute) { 
+   
   }
 
   get formValue(){
@@ -55,19 +56,12 @@ export class ImageUploadComponent implements OnInit {
      
   // Submit Form Data
   submit(){
-    this.http.post('http://89.89.222.132:3080/api/upload', this.myForm.value, {observe: 'response', reportProgress: true, withCredentials : false})
-      .subscribe(res => {
-        console.log(res);
-        alert('Uploaded Successfully.');
-      })
+    this.imageService.uploadPicture(this.myForm.value);
   }
 
-  // uploadImage(image: any){
-  //   image.inProgress = true;    
-  //   this.imageService.uploadPicture(image.value);
-  // }
-
   ngOnInit(): void {
+    this.gameID = this.route.snapshot.paramMap.get('id');
+    this.myForm.patchValue({gameID: this.gameID});
   }
 
 }

@@ -2,22 +2,22 @@ import { Game } from "../Models/gameModel";
 import { Image } from "../Models/imageModel";
 
 import { GameRepository } from "../Repositories/gameRepository";
-import { ImageGameRepository } from "../Repositories/imageGameRepository";
+import { pictureRepository } from "../Repositories/pictureRepository";
 
 export class gameService {
   private gameRepository: GameRepository;
-  private imageGameRepository: ImageGameRepository;
+  private pictureRepository: pictureRepository;
 
   constructor() {
     this.gameRepository = new GameRepository();
-    this.imageGameRepository = new ImageGameRepository();
+    this.pictureRepository = new pictureRepository();
   }
 
   async findAll() {
     return this.gameRepository
       .findAll()
       .then(async (datas) => {
-        let gameImage = await this.imageGameRepository
+        let gameImage = await this.pictureRepository
           .findAll()
           .then((data) => {
             return data;
@@ -57,7 +57,7 @@ export class gameService {
     return this.gameRepository
       .findById(id)
       .then(async (data) => {
-        let gameImage = await this.imageGameRepository
+        let gameImage = await this.pictureRepository
         .findByGameId(id)
         .then((data) => {
           return data;

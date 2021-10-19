@@ -14,7 +14,7 @@
 
     <div class="form-group">
       <label for="file">File</label>
-      <input formControlName="file" id="file" type="file" class="form-control-file" multiple=""
+      <input formControlName="file" id="file" type="file" accept="image/*" class="form-control-file" multiple=""
         (change)="onFileChange($event)">
       <div *ngIf="formValue.file.touched && formValue.file.invalid" class="alert alert-danger">
         <div *ngIf="formValue.file.errors && formValue.file.errors.required">File is required.</div>
