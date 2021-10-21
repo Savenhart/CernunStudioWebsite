@@ -11,6 +11,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { GameSheetComponent } from './components/game-sheet/game-sheet.component';
+import { GameListComponent } from './components/game-list/game-list.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,19 @@ import { RegisterComponent } from './components/register/register.component';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-
+    UserProfileComponent,
+    GameSheetComponent,
+    GameListComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
