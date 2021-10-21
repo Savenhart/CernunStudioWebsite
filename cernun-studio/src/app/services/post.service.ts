@@ -14,7 +14,7 @@ export class PostService {
   create(post:Post): Observable<any> {
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(post);
- 
+    
     return this.http.post<Post>(`${environment.apiUrl}/api/posts`, body, {'headers':headers, observe: 'response',reportProgress: true});
 }
   getAll(){

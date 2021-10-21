@@ -1,5 +1,9 @@
 {
     "/api/*": "/$1",
     "users": "/api/users",
-    "posts": "/api/posts"
+    "posts": "/api/posts",
+    "games": "/api/games",
+    "picture": "/Api/picture",
+    "uploadImage":"/api/Assets/Pictures",
+    "serverAddress":"http://89.89.222.132:3080/"
   }

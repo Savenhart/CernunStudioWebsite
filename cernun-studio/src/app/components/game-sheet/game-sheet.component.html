@@ -1,0 +1,13 @@
+<div>
+  <h1>{{ game.name }}</h1>
+  <p>{{ game.date }}</p>
+  <p>{{ game.content }}</p>
+  <p>{{ game.link }}</p>
+  <p *ngFor="let img of game.images">
+    {{ img.name }}
+    <img
+      [src]="img.link"
+    />
+  </p>
+  <app-image-upload></app-image-upload>
+</div>
